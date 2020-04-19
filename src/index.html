@@ -3,10 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>webpack starterkit</title>
+  <title>memorize</title>
 </head>
 <body>
-  <h1>webpack starter</h1>
-  <p>✨ A lightweight foundation for your next webpack based frontend project.</p>
+  <aside class="menu">
+    <div class="menu__title"/>
+      <h1>🧐 memorize.</h1>
+    </div>
+    <div class="menu__score" id="score">
+      <p class="points"><span id="points">0</span><span class="score__suffix">pts.</span></p>
+      <p class="attempts"><span id="attempts">0</span> attempts</p>
+    </div>
+    <div class="menu__options">
+      <div class="option">
+        <p>🤔 Choose the number of cards</p>
+        <button class="btn toggle-btn toggle-btn--active" type="button" name="button" data-memorize="numberOfCards-16">16</button>
+        <button class="btn toggle-btn" type="button" name="button" data-memorize="numberOfCards-36">36</button>
+      </div>
+      <div class="option">
+        <p>🤘 Enable hardcore mode</p>
+        <button class="btn toggle-btn toggle-btn--active" type="button" name="button" data-memorize="hardcoreMode-off">nope</button>
+        <button class="btn toggle-btn" type="button" name="button" data-memorize="hardcoreMode-on">yeah</button>
+      </div>
+      <div class="option">
+        <p>🥳 Start when ready!</p>
+        <button class="btn btn--secondary" type="button" name="button" data-memorize="reset">Reset</button>
+        <button class="btn" type="button" name="button" data-memorize="start">Start game!</button>
+      </div>
+    </div>
+  </aside>
+  <section id="game"></section>
 </body>
 </html>
