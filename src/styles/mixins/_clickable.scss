@@ -1,0 +1,13 @@
+// Mixin for styling clickable elements (cards and buttons)
+@mixin clickable($always: true) {
+  cursor: pointer;
+  outline: none;
+  @if $always {
+    box-shadow: $--shadow-sm;
+    &:hover { box-shadow: $--shadow-lg }
+  }
+  @else {
+    &:hover:not(:active) { box-shadow: $--shadow-lg }
+    &:active, &:focus { box-shadow: $--shadow-sm }
+  }
+}
