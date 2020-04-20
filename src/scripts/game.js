@@ -33,7 +33,7 @@ class Game {
     this.generateCards();
     this.render();
     // If hardcore mode is enabled set the function to run every 5 seconds
-    if (this.hardcoreMode) this.handicap = setInterval(() => this.hardcore(), 5000);
+    if (this.hardcoreMode) this.handicap = setInterval(() => this.hardcore(), 1500 * Math.sqrt(numberOfCards));
   }
 
   generateCards () {
