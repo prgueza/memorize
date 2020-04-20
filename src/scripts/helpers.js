@@ -1,5 +1,5 @@
 // Helper function that calculates the score based on the game time and number of attempts
-function score (time, attempts, penalization = { time: 1, attempts: 5 }) {
+function getScore (time, attempts, penalization = { time: 1, attempts: 5 }) {
   const attemptPenalization = attempts * (penalization.attempts / 100); // Attemps penalize more so random picks are not rewarded
   const timePenalization = time * (penalization.time / 100); // Time penalizes less so thinking is rewarded
   return 2 * Math.round(Math.log(attemptPenalization + 1.01)**(-1) + Math.log(timePenalization + 1.01)**(-1));
@@ -35,4 +35,4 @@ function getOnTransitionEndName() {
   }
 }
 
-export { score, shuffle, getOnTransitionEndName };
+export { getScore, shuffle, getOnTransitionEndName };

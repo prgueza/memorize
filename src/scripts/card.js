@@ -70,8 +70,8 @@ class Card {
 
   async cover (resolve) {
     return new Promise((resolve) => {
-      const onTransitionEnd = window.__browserTransitionEnd__;
-      this.cardEl.addEventListener(onTransitionEnd, this.transitionEndHandler(resolve));
+      // Let the transitionEnd event resolve the promise so we can 'await' for the transition to finish
+      this.cardEl.addEventListener(window.__browserTransitionEnd__, this.transitionEndHandler(resolve));
       this.cardEl.classList.remove(this.uncoveredClass);
       this.setStatus('covered');
     });
@@ -79,8 +79,8 @@ class Card {
 
   async uncover () {
     return new Promise((resolve) => {
-      const onTransitionEnd = window.__browserTransitionEnd__;
-      this.cardEl.addEventListener(onTransitionEnd, this.transitionEndHandler(resolve));
+      // Let the transitionEnd event resolve the promise so we can 'await' for the transition to finish
+      this.cardEl.addEventListener(window.__browserTransitionEnd__, this.transitionEndHandler(resolve));
       this.cardEl.classList.add(this.uncoveredClass);
       this.setStatus('uncovered');
     });

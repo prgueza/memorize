@@ -1,5 +1,5 @@
 import Card from './card';
-import { score, shuffle } from './helpers';
+import { getScore, shuffle } from './helpers';
 
 class Game {
   constructor ({ el, scoreEl, numberOfCards, hardcoreMode}) {
@@ -78,38 +78,43 @@ class Game {
     console.log('win');
   }
 
-  updateScore (solved = false) {
+  updateScoreBoard ({ score } = { score: false }) {
     this.attempts += 1;
     this.scoreEl.querySelector('#attempts').textContent = this.attempts;
-    if (!solved) return;
+    if (!score) return;
     const secondsElapsed = (new Date().getTime() - this.gameStart.getTime()) / 1000;
-    this.score += score(secondsElapsed, this.attempts);
+    this.score += getScore(secondsElapsed, this.attempts);
     this.scoreEl.querySelector('#points').textContent = this.score;
   }
 
   async solver (card) {
     const nOfCandidates = this.candidates.length;
-    // If card is solved nothing should happen
+    // If card is solved or uncovered nothing should happen
     if (card.isSolved || card.isUncovered) return;
-    // If only one card is present in the candidates array unblock the mutex and wait for another card
+    // Change behaviour regarding whether it is the first or second card
     switch (nOfCandidates) {
       case 0:
+        // If it's the first card push it to the candidates array and uncover the card
         this.candidates.push(card);
         card.uncover();
         break;
       case 1:
+        // If it's the second card push it to the candidates array and check for a match
         this.candidates.push(card);
+        // Wait for the animation to end before checking for a match
         await card.uncover();
         if (this.candidates[0].id === this.candidates[1].id) {
-          // If the ids match, update score, solve both cards, update score, check if the game is over and unblock the mutex
-          this.updateScore(true);
+          // If the ids match, update score, solve both cards
+          this.updateScoreBoard({ score: true });
+          // solve both cards
           this.candidates.forEach(card => card.solve());
+          // and check if the game is over
           this.checkWinCondition();
         } else {
-          this.updateScore();
-          // If the ids don't match cover back the cards and pass the resolve handler to the card cover function
+          //  If the ids don't match update only attempts
+          this.updateScoreBoard();
+          // cover back the cards and wait for the animation to finish
           await Promise.all([this.candidates.map(card => card.cover())]);
-          // this.candidates.forEach(card => card.cover(resolve));
         }
         // Clear the candidates array either way (matching or non-matching ids)
         this.candidates = [];
