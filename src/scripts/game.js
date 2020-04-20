@@ -32,7 +32,7 @@ class Game {
     // Generate a set of cards and render the board content
     this.generateCards();
     this.render();
-    // If hardcore mode is enabled set the function to run every 5 seconds
+    // If hardcore mode is enabled set the function to run periodically
     if (this.hardcoreMode) this.handicap = setInterval(() => this.hardcore(), 1500 * Math.sqrt(numberOfCards));
   }
 
