@@ -19,18 +19,6 @@ function shuffle (items) {
   return shuffled;
 }
 
-// Helper functions that blocks the callback if last callback has not been resolved
-function mutex (callback) {
-  let blocked = false; // Mutex flag
-  return async (...args) => {
-    if (!blocked) { // Only run the callback if the mutex is not blocked
-      blocked = true; // Block the mutex
-      await callback(...args); // Wait for the callback to resolve
-      blocked = false; // Unblock the mutex
-    }
-  };
-}
-
 // Helper function that gets the transitionEnd event name based on the browser
 function getOnTransitionEndName() {
   const transitions = {
@@ -47,4 +35,4 @@ function getOnTransitionEndName() {
   }
 }
 
-export { score, shuffle, mutex, getOnTransitionEndName };
+export { score, shuffle, getOnTransitionEndName };

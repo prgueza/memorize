@@ -41,7 +41,7 @@ class Card {
       `<div class="${this.baseClass}">
         <div class="${this.coverClass}"></div>
         <div class="${this.faceClass}">
-          <img src="public/svg/${this.id}.svg" width="100%" height="100%"/>
+          <img src="public/img/${this.id}.png" width="100%" height="auto"/>
         </div>
       </div>`;
     // Build html structure

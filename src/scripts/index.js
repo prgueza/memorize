@@ -1,4 +1,4 @@
-import '../styles/index.scss';
+import '../styles/main.scss';
 import { getOnTransitionEndName } from './helpers';
 import Game from './game.js';
 import Card from './card.js';
