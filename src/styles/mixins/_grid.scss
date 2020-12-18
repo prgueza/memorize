@@ -1,8 +1,0 @@
-// Mixin for generating a grid of cards
-@mixin grid($columns, $rows) {
-  height: calc(100vh - 4rem);
-  width: calc(100vh - 4rem);
-  display: grid;
-  grid-template-columns: repeat($columns, 100% / $columns);
-  grid-template-rows: repeat($rows, 100% / $rows);
-}
